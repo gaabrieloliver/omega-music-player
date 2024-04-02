@@ -1,0 +1,83 @@
+
+body {
+    background-image: linear-gradient(25deg, rgb(59, 88, 93), rgb(29, 40, 42));
+    
+    /* VH = Altura Disponível, ou seja, pega 100% da página disponível */
+    height: 100vh;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+button {
+    background-color: inherit;
+    color: inherit;
+    border: none;
+}
+
+
+
+#below-cover {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3em 0 1em 0;
+}
+
+#button-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button {
+    font-size: 1.5em;
+}
+.button-navigate {
+    font-size: 3em;
+}
+
+.button-biggest {
+    font-size: 4em;
+}
+
+#cover {
+    width: 450px;
+    border-radius: 14px;
+}
+
+#playlist-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 0 4em 0;
+}
+
+#song-name {
+    font-size: 2em; 
+    font-weight: bold;
+}
+
+.light-color {
+    color: #8b999c;
+}
+
+#progress-bar {
+    background: #8b999c;
+    height: 3px;
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 1.5em;
+}
+
+#current-progress {
+    background-color: white;
+    height: inherit;
+    border-radius: inherit;
+    width: 50%;
+}

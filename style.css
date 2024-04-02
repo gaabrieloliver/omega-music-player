@@ -1,6 +1,6 @@
 
 body {
-    background-image: linear-gradient(25deg, rgb(59, 88, 93), rgb(29, 40, 42));
+    background-image: linear-gradient(25deg, #1d282a, #b3b3b3);
     
     /* VH = Altura Disponível, ou seja, pega 100% da página disponível */
     height: 100vh;

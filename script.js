@@ -13,23 +13,26 @@ const oTempoMudou = {
     songName : 'O Tempo Mudou',
     artist : 'Rodolfo Abrantes',
     bandName : 'Rodolfo Abrantes',
-    file : 'album-o-dia-em-que-sera-pra-sempre',
-    file : 'O Tempo Mudou'
+    file : 'o_tempo_mudou',
 };
 
 const oDiaQueSeraPraSempre = {
     songName : 'O Dia Que Será Pra Sempre',
     artist : 'Rodolfo Abrantes',
     bandName : 'Rodolfo Abrantes',
-    file : 'album-o-dia-em-que-sera-pra-sempre',
-    file : 'O Dia Que Será Pra Sempre'
+    file : 'o_dia_que_sera_pra_sempre'
 };
 
-
+const pisaduras = {
+    songName : 'Pisaduras',
+    artist : 'Rodolfo Abrantes',
+    bandName : 'Rodolfo Abrantes',
+    file : 'pisaduras'
+};
 
 let isPlaying = false;
-
-
+const playlist = [oTempoMudou, oDiaQueSeraPraSempre, pisaduras];
+let index = 0;
 
 function playSong() {
     play.querySelector('.bi').classList.remove('bi-play-circle-fill');
@@ -54,5 +57,40 @@ function playPauseDecider() {
     }
 }
 
+function initializeSong(){
+    cover.src = `images/${playlist[index].file}.jpeg`;
+    song.src = `songs/${playlist[index].file}.mp3`;
+    songName.innerText = playlist[index].songName;
+    bandName.innerText = playlist[index].artist;
+}
+
+function previousSong() {
+    if (index === 0) {
+        index = playlist.length - 1;
+    }
+    else {
+        // index = index - 1;
+        index -= 1;
+    }
+    initializeSong();
+    playSong();
+}
+
+function nextSong() {
+    if (index === playlist.length - 1) {
+        index = 0;
+    }
+    else {
+        // index = index - 1;
+        index += 1;
+    }
+    initializeSong();
+    playSong();
+}
+
+initializeSong();
+
 play.addEventListener('click', playPauseDecider);
+previous.addEventListener('click', previousSong);
+next.addEventListener('click', nextSong);
 

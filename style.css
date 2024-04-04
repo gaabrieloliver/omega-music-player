@@ -1,6 +1,6 @@
 
 body {
-    background-image: linear-gradient(25deg, #1d282a, #b3b3b3);
+    background-image: linear-gradient(25deg, #111111, #b3b3b3);
     
     /* VH = Altura Disponível, ou seja, pega 100% da página disponível */
     height: 100vh;
@@ -18,8 +18,6 @@ button {
     color: inherit;
     border: none;
 }
-
-
 
 #below-cover {
     display: flex;
@@ -76,8 +74,10 @@ button {
 }
 
 #current-progress {
+    --progress: 0%;
     background-color: white;
     height: inherit;
+    width: var(--progress);
     border-radius: inherit;
-    width: 50%;
 }
+

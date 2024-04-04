@@ -1,13 +1,14 @@
 const playlistTitle = document.getElementById('playlist-title');
 const shuffle = document.getElementById('shuffle');
+const repeat = document.getElementById('repeat');
 const previous = document.getElementById('previous');
 const next = document.getElementById('next');
-const repeat = document.getElementById('repeat');
 const cover = document.getElementById('cover');
 const bandName = document.getElementById('band-name');
 const songName = document.getElementById('song-name');
 const song = document.getElementById('audio');
 const play = document.getElementById('play');
+const currentProgress = document.getElementById('current-progress');
 
 const oTempoMudou = {
     songName : 'O Tempo Mudou',
@@ -88,9 +89,17 @@ function nextSong() {
     playSong();
 }
 
+function updateProgressBar(){
+    song.currentTime
+    song.duration
+    const barWidth = (song.currentTime/song.duration)*100;
+    currentProgress.style.setProperty('--progress', `${barWidth}%`);
+}
+
 initializeSong();
 
 play.addEventListener('click', playPauseDecider);
 previous.addEventListener('click', previousSong);
 next.addEventListener('click', nextSong);
+song.addEventListener('timeupdate', updateProgressBar);
 

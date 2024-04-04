@@ -1,5 +1,4 @@
 const playlistTitle = document.getElementById('playlist-title');
-const shuffle = document.getElementById('shuffle');
 const repeat = document.getElementById('repeat');
 const previous = document.getElementById('previous');
 const next = document.getElementById('next');
@@ -9,6 +8,8 @@ const songName = document.getElementById('song-name');
 const song = document.getElementById('audio');
 const play = document.getElementById('play');
 const currentProgress = document.getElementById('current-progress');
+const shuffle = document.getElementById('shuffle');
+const progressContainer = document.getElementById('progress-container');
 
 const oTempoMudou = {
     songName : 'O Tempo Mudou',
@@ -96,10 +97,17 @@ function updateProgressBar(){
     currentProgress.style.setProperty('--progress', `${barWidth}%`);
 }
 
+function jumpTo(event) {
+    const width = progressContainer.clientWidth;
+    const clickPosition = event.offsetX
+    const jumpToTime = (clickPosition/width) * song.duration;
+    song.currentTime = jumpToTime;
+}
+
 initializeSong();
 
 play.addEventListener('click', playPauseDecider);
 previous.addEventListener('click', previousSong);
 next.addEventListener('click', nextSong);
 song.addEventListener('timeupdate', updateProgressBar);
-
+progressContainer.addEventListener('click', jumpTo);

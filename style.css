@@ -82,5 +82,32 @@ button {
 
 #progress-container {
     padding-bottom: 1em;
+    cursor: pointer;
 }
 
+@media (max-width: 768px) {
+
+    #cover {
+        width: 90%;
+        justify-content: center;
+        align-items: center;
+        margin: 1em;
+    }
+
+    .music-container {
+        width: 80%;
+    }
+    /* body {
+        width: 100%;
+        margin: 0 auto;
+    } */
+    div {
+        width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    div {
+        width: 100%;
+    }
+}

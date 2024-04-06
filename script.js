@@ -8,8 +8,8 @@ const songName = document.getElementById('song-name');
 const song = document.getElementById('audio');
 const play = document.getElementById('play');
 const currentProgress = document.getElementById('current-progress');
-const shuffle = document.getElementById('shuffle');
 const progressContainer = document.getElementById('progress-container');
+const shuffleButton = document.getElementById('shuffle');
 
 const oTempoMudou = {
     songName : 'O Tempo Mudou',
@@ -33,7 +33,9 @@ const pisaduras = {
 };
 
 let isPlaying = false;
-const playlist = [oTempoMudou, oDiaQueSeraPraSempre, pisaduras];
+let isShuffled = false;
+const originalPlaylist = [oTempoMudou, oDiaQueSeraPraSempre, pisaduras];
+let sortedPlaylist = [...originalPlaylist]; /* ... === spread(espalhar)*/
 let index = 0;
 
 function playSong() {
@@ -59,16 +61,16 @@ function playPauseDecider() {
     }
 }
 
-function initializeSong(){
-    cover.src = `images/${playlist[index].file}.jpeg`;
-    song.src = `songs/${playlist[index].file}.mp3`;
-    songName.innerText = playlist[index].songName;
-    bandName.innerText = playlist[index].artist;
+function initializeSong(){ 
+    cover.src = `images/${sortedPlaylist[index].file}.jpeg`;
+    song.src = `songs/${sortedPlaylist[index].file}.mp3`;
+    songName.innerText = sortedPlaylist[index].songName;
+    bandName.innerText = sortedPlaylist[index].artist;
 }
 
 function previousSong() {
     if (index === 0) {
-        index = playlist.length - 1;
+        index = sortedPlaylist.length - 1;
     }
     else {
         // index = index - 1;
@@ -79,7 +81,7 @@ function previousSong() {
 }
 
 function nextSong() {
-    if (index === playlist.length - 1) {
+    if (index === sortedPlaylist.length - 1) {
         index = 0;
     }
     else {
@@ -104,6 +106,13 @@ function jumpTo(event) {
     song.currentTime = jumpToTime;
 }
 
+function shuffleButtonClicked() {
+    if(isShuffled === false){
+        isShuffled === true;
+        shuffleArray();
+    } 
+}
+
 initializeSong();
 
 play.addEventListener('click', playPauseDecider);
@@ -111,3 +120,4 @@ previous.addEventListener('click', previousSong);
 next.addEventListener('click', nextSong);
 song.addEventListener('timeupdate', updateProgressBar);
 progressContainer.addEventListener('click', jumpTo);
+shuffleButton.addEventListener('click', shuffleButtonClicked);

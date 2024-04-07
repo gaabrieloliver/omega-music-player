@@ -80,9 +80,20 @@ button {
     border-radius: inherit;
 }
 
-#progress-container {
-    padding-bottom: 1em;
+button, #progress-container {
     cursor: pointer;
+}
+
+.button-active {
+    color: rgb(110, 168, 132);
+}
+
+#time-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 0.5em;
+    font-size: smaller;
 }
 
 @media (max-width: 768px) {

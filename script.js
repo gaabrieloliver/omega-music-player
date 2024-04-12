@@ -12,6 +12,7 @@ const progressContainer = document.getElementById('progress-container');
 const shuffleButton = document.getElementById('shuffle');
 const songTime = document.getElementById('song-time');
 const totalTime = document.getElementById('total-time');
+const likeButton = document.getElementById('like');
 
 
 const oTempoMudou = {
@@ -19,26 +20,29 @@ const oTempoMudou = {
     artist : 'Rodolfo Abrantes',
     bandName : 'Rodolfo Abrantes',
     file : 'o_tempo_mudou',
+    liked : false,
 };
 
 const oDiaQueSeraPraSempre = {
     songName : 'O Dia Que Será Pra Sempre',
     artist : 'Rodolfo Abrantes',
     bandName : 'Rodolfo Abrantes',
-    file : 'o_dia_que_sera_pra_sempre'
+    file : 'o_dia_que_sera_pra_sempre',
+    liked : false,
 };
 
 const pisaduras = {
     songName : 'Pisaduras',
     artist : 'Rodolfo Abrantes',
     bandName : 'Rodolfo Abrantes',
-    file : 'pisaduras'
+    file : 'pisaduras',
+    liked : false,
 };
 
 let isPlaying = false;
 let isShuffled = false;
 let repeatOn = false;
-const originalPlaylist = [oTempoMudou, oDiaQueSeraPraSempre, pisaduras];
+const originalPlaylist = JSON.parse(localStorage.getItem('playlist')) ?? [oTempoMudou, oDiaQueSeraPraSempre, pisaduras];
 let sortedPlaylist = [...originalPlaylist]; /* ... === spread(espalhar)*/
 let index = 0;
 
@@ -65,11 +69,25 @@ function playPauseDecider() {
     }
 }
 
+//apenas parte visual
+function likeButtonRender() {
+    if (sortedPlaylist[index].liked === true) {
+        likeButton.querySelector('.bi').classList.remove('bi-heart');
+        likeButton.querySelector('.bi').classList.add('bi-heart-fill');
+        likeButton.classList.add('button-active');
+    } else {
+        likeButton.querySelector('.bi').classList.add('bi-heart');
+        likeButton.querySelector('.bi').classList.remove('bi-heart-fill');
+        likeButton.classList.remove('button-active');
+    }
+}
+
 function initializeSong(){ 
     cover.src = `images/${sortedPlaylist[index].file}.jpeg`;
     song.src = `songs/${sortedPlaylist[index].file}.mp3`;
     songName.innerText = sortedPlaylist[index].songName;
     bandName.innerText = sortedPlaylist[index].artist;
+    likeButtonRender();
 }
 
 function previousSong() {
@@ -137,6 +155,16 @@ function shuffleButtonClicked() {
     }
 }
 
+function likeButtonClicked() {
+    if(sortedPlaylist[index].liked === false) {
+        sortedPlaylist[index].liked = true;
+    } else {
+        sortedPlaylist[index].liked = false;
+    }
+    likeButtonRender();
+    localStorage.setItem('playlist', JSON.stringify(originalPlaylist));
+}
+
 function repeatButtonClicked() {
     if(repeatOn === false){
         repeatOn = true;
@@ -182,3 +210,4 @@ song.addEventListener('loadedmetadata', updateTotalTime);
 progressContainer.addEventListener('click', jumpTo);
 shuffleButton.addEventListener('click', shuffleButtonClicked);
 repeatButton.addEventListener('click', repeatButtonClicked);
+likeButton.addEventListener('click', likeButtonClicked);
